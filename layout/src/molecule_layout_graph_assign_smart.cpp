@@ -1231,6 +1231,7 @@ void MoleculeLayoutGraphSmart::_do_segment_smoothing(Array<Vec2f> &rotation_poin
 
 void MoleculeLayoutGraphSmart::_segment_smoothing_prepearing(const Cycle &cycle, Array<int> &rotation_vertex, Array<Vec2f> &rotation_point, ObjArray<MoleculeLayoutSmoothingSegment> &segment, MoleculeLayoutMacrocyclesLattice& layout) {
    int cycle_size = cycle.vertexCount();
+   printf("%d\n", cycle_size);
 
    QS_DEF(Array<bool>, layout_comp_touch);
    layout_comp_touch.clear_resize(_layout_component_count);
