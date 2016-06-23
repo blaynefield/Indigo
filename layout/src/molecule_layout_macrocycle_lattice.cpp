@@ -86,6 +86,8 @@ TL_CP_GET(_vertex_drawn)
    _target_angle.zerofill();
 
    _vertex_added_square.clear_resize(size);
+   _vertex_added_square.zerofill();
+
    _vertex_drawn.clear_resize(size);
 
 
@@ -1286,4 +1288,9 @@ Vec2f MoleculeLayoutMacrocyclesLattice::CycleLayout::getWantedVector(int vertex_
    newPoint += (point[vertex_number] - p3)*coef3;
 
    return newPoint * SMOOTHING_MULTIPLIER;
+}
+
+void MoleculeLayoutMacrocyclesLattice::print() {
+    for (int i = 0; i < length; i++) printf("%.5f ", _vertex_added_square[i]);
+    printf("\n");
 }

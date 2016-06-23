@@ -162,6 +162,8 @@ namespace indigo {
       Vec2f &getPos(int v) const;
       float preliminary_layout(CycleLayout &cl);
 
+      void print();
+
       DECL_ERROR;
 
    private:
