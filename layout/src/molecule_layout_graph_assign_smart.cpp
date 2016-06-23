@@ -386,6 +386,7 @@ void MoleculeLayoutGraphSmart::_assignEveryCycle(const Cycle &cycle)
 	   for (int i = 0; i < size; i++)
 		   _molecule->cis_trans.setParity(_layout_edges[cycle.getEdge(i)].orig_idx, 0);
 
+   layout.print();
    for (int i = 0; i < size; i++) {
 
 	   // edge parallels
@@ -475,11 +476,11 @@ void MoleculeLayoutGraphSmart::_assignEveryCycle(const Cycle &cycle)
 	   // trees sizes
 
    }
-
+   layout.print();
    QS_DEF(ObjArray<MoleculeLayoutSmoothingSegment>, segment);
    QS_DEF(Array<Vec2f>, rotation_point);
    QS_DEF(Array<int>, rotation_vertex);
-
+    
    _segment_smoothing_prepearing(cycle, rotation_vertex, rotation_point, segment, layout);
 
    int segment_count = segment.size();
@@ -490,7 +491,7 @@ void MoleculeLayoutGraphSmart::_assignEveryCycle(const Cycle &cycle)
 		   if (segment[i].is_finish(v)) if (segment[i]._graph.getVertex(v).degree() > 2) layout.setEdgeStereo((rotation_vertex[(i + 1) % segment_count] - 1 + size) % size, 0);
 	   }
    }
-
+   layout.print();
    /*bool easy_case = size <= 9;
    if (easy_case) {
    QS_DEF(Array<int>, last);

@@ -1291,6 +1291,6 @@ Vec2f MoleculeLayoutMacrocyclesLattice::CycleLayout::getWantedVector(int vertex_
 }
 
 void MoleculeLayoutMacrocyclesLattice::print() {
-    for (int i = 0; i < length; i++) printf("%.5f ", _vertex_added_square[i]);
+    for (int i = 0; i < length; i++) printf("%d ", _edge_stereo[i]);
     printf("\n");
 }
