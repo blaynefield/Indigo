@@ -157,13 +157,21 @@ void MoleculeLayoutMacrocyclesLattice::doLayout() {
 
    Array<answer_point> path;
    path.clear_resize(length + 1);
-   //printf("%d\n", points.size());
+   printf("%d\n", points.size());
    for (int i = 0; i < 100 && i < points.size(); i++) {
       answfld._restore_path(path.ptr(), points[i]);
       cl.init(path.ptr());
+      printf("%d: \n", i);
+      for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.rotate[j]);
+      printf("\n");
+      for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.edge_length[j]);
+      printf("\n");
+
       smoothing(cl);
 
       float current_rating = rating(cl);
+
+      printf("%.5f\n", current_rating);
 
       if (current_rating + EPSILON < best_rating) {
           printf("%d: %.5f\n", i, current_rating);
