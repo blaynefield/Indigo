@@ -166,6 +166,7 @@ void MoleculeLayoutMacrocyclesLattice::doLayout() {
       float current_rating = rating(cl);
 
       if (current_rating + EPSILON < best_rating) {
+          printf("%d: %.5f\n", i, current_rating);
          best_rating = current_rating;
          best_number = i;
       }
