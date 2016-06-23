@@ -166,8 +166,19 @@ void MoleculeLayoutMacrocyclesLattice::doLayout() {
       printf("\n");
       for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.edge_length[j]);
       printf("\n");
+      for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.external_vertex_number[j]);
+      printf("\n");
+      for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].x);
+      printf("\n");
+      for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].y);
+      printf("\n");
 
       smoothing(cl);
+
+      for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].x);
+      printf("\n");
+      for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].y);
+      printf("\n");
 
       float current_rating = rating(cl);
 
