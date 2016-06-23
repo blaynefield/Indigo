@@ -161,28 +161,35 @@ void MoleculeLayoutMacrocyclesLattice::doLayout() {
    for (int i = 0; i < 100 && i < points.size(); i++) {
       answfld._restore_path(path.ptr(), points[i]);
       cl.init(path.ptr());
-      printf("%d: \n", i);
-      for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.rotate[j]);
-      printf("\n");
-      for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.edge_length[j]);
-      printf("\n");
-      for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.external_vertex_number[j]);
-      printf("\n");
-      for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].x);
-      printf("\n");
-      for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].y);
-      printf("\n");
+      bool flag = i == 7;
+      if (flag) {
+          printf("%d: \n", i);
+          for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.rotate[j]);
+          printf("\n");
+          for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.edge_length[j]);
+          printf("\n");
+          for (int j = 0; j < cl.vertex_count; j++) printf("%d ", cl.external_vertex_number[j]);
+          printf("\n");
+          for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].x);
+          printf("\n");
+          for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].y);
+          printf("\n");
+      }
 
-      smoothing(cl);
+      smoothing(cl, flag);
 
-      for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].x);
-      printf("\n");
-      for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].y);
-      printf("\n");
+      if (flag) {
+          for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].x);
+          printf("\n");
+          for (int j = 0; j < cl.vertex_count; j++) printf("%.5f ", cl.point[j].y);
+          printf("\n");
+      }
 
       float current_rating = rating(cl);
 
-      printf("%.5f\n", current_rating);
+      if (flag) {
+          printf("%.5f\n", current_rating);
+      }
 
       if (current_rating + EPSILON < best_rating) {
           printf("%d: %.5f\n", i, current_rating);
@@ -1179,7 +1186,7 @@ void MoleculeLayoutMacrocyclesLattice::updateTouchingPoints(Array<local_pair_id>
    }
 }
 
-void MoleculeLayoutMacrocyclesLattice::smoothing(CycleLayout &cl) {
+void MoleculeLayoutMacrocyclesLattice::smoothing(CycleLayout &cl, bool do_print) {
     closing(cl);
 
     Random rand(SOME_MAGIC_INT_FOR_RANDOM_2);
@@ -1190,7 +1197,13 @@ void MoleculeLayoutMacrocyclesLattice::smoothing(CycleLayout &cl) {
     float coef = SMOOTHING_MULTIPLIER;
     for (int i = 0; i < iter_count; i++) {
         if ((i & (i - 1)) == 0) updateTouchingPoints(touching_points, cl);
-        smoothingStep(cl, rand.next(cl.vertex_count), coef *= CHANGE_FACTOR, touching_points);
+        if (do_print && (i & (i - 1)) == 0) {
+            printf("touching points : %d\n", touching_points.size());
+            for (int j = 0; j < touching_points.size(); j++) printf("%d - %.5f, ", touching_points[j].left, touching_points[j].right);
+        }
+        int current_vertex = rand.next(cl.vertex_count);
+        smoothingStep(cl, current_vertex, coef *= CHANGE_FACTOR, touching_points);
+        if (do_print) printf("Current vertex (%d): x = %.5f, y = %.5f\n", current_vertex, cl.point[current_vertex].x, cl.point[current_vertex].y);
     }
 }
 
