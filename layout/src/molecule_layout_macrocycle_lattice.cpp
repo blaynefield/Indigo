@@ -1159,7 +1159,9 @@ void MoleculeLayoutMacrocyclesLattice::updateTouchingPoints(Array<local_pair_id>
    all_points.clear();
    all_numbers.clear();
    for (int j = 0; j < len; j++) {
-      for (int t = cl.external_vertex_number[j], s = 0; t < cl.external_vertex_number[(j + 1) % len]; t++, s += 1.0 / cl.edge_length[j]) {
+       float s;
+       int t;
+      for (t = cl.external_vertex_number[j], s = 0; t < cl.external_vertex_number[(j + 1) % len]; t++, s += 1.0f / cl.edge_length[j]) {
          all_points.push(cl.point[j] * (1 - s) + cl.point[j] * s);
          all_numbers.push(j + s);
       }
