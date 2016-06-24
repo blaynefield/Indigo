@@ -155,7 +155,7 @@ namespace indigo {
       int period(CycleLayout& cl);
       bool is_period(CycleLayout& cl, int k);
       void closingStep(CycleLayout &cl, int index, int base_vertex, bool fix_angle, bool fix_next, float multiplyer);
-      void closing(CycleLayout &cl);
+      void closing(CycleLayout &cl, bool do_print = false);
       void updateTouchingPoints(Array<local_pair_id>&, CycleLayout&, bool do_print = false);
       void smoothingStep(CycleLayout &cl, int vertex_number, float coef, Array<local_pair_id>&);
       void smoothing(CycleLayout &cl, bool do_print = false);

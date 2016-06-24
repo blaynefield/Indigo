@@ -1117,11 +1117,13 @@ void MoleculeLayoutMacrocyclesLattice::closingStep(CycleLayout &cl, int index, i
 
 }
 
-void MoleculeLayoutMacrocyclesLattice::closing(CycleLayout &cl) {
+void MoleculeLayoutMacrocyclesLattice::closing(CycleLayout &cl, bool do_print) {
    Random rand(SOME_MAGIC_INT_FOR_RANDOM_1);
 
    int iter_count = max(200 * cl.vertex_count, 10000);
    float multiplyer = 0.3;
+
+   if (do_print) printf("%d %.5f\n", iter_count, multiplyer);
 
    for (int i = 0; i < iter_count; i++) {
       float lenSqr = (cl.point[0] - cl.point[cl.vertex_count]).lengthSqr();
@@ -1130,7 +1132,7 @@ void MoleculeLayoutMacrocyclesLattice::closing(CycleLayout &cl) {
 		  for (int i = 0; i < cl.vertex_count; i++) angle += cl.point[i].calc_angle_pos(cl.point[(i + 1) % cl.vertex_count], cl.point[(i + cl.vertex_count - 1) % cl.vertex_count]);
 		  if (angle < 0) {
 			  cl.point[cl.vertex_count].copy(cl.point[0]);
-			  //printf("%d/%d\n", i, iter_count);
+			  if (do_print) printf("%d iterations\n", i);
 			  break;
 		  }
       }
@@ -1202,11 +1204,13 @@ void MoleculeLayoutMacrocyclesLattice::smoothing(CycleLayout &cl, bool do_print)
     if (do_print) {
         printf("Before closing\n");
         for (int i = 0; i < cl.point.size(); i++) printf("%.5f %.5f ", cl.point[i].x, cl.point[i].y);
+        printf("\n");
     }
     closing(cl);
     if (do_print) {
         printf("After closing\n");
         for (int i = 0; i < cl.point.size(); i++) printf("%.5f %.5f ", cl.point[i].x, cl.point[i].y);
+        printf("\n");
     }
 
     Random rand(SOME_MAGIC_INT_FOR_RANDOM_2);
