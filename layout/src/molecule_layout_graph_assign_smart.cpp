@@ -284,10 +284,10 @@ void MoleculeLayoutGraphSmart::_assignRelativeCoordinates (int &fixed_component,
 
    Random rand(111111);
    for (int j = 0; j < 100; j++) {
-       Vec2f x(rand.nextDoubleBounded(-1, 1), rand.nextDoubleBounded(-1, 1));
-       Vec2f y(rand.nextDoubleBounded(-1, 1), rand.nextDoubleBounded(-1, 1));
-       Vec2f z(rand.nextDoubleBounded(-1, 1), rand.nextDoubleBounded(-1, 1));
-       print_float(x.calc_angle(y, z), '\n');
+       Vec2f x(rand.nextBounded(-100, 100), rand.nextBounded(-100, 100));
+       Vec2f y(rand.nextBounded(-100, 100), rand.nextBounded(-100, 100));
+       Vec2f z(rand.nextBounded(-100, 100), rand.nextBounded(-100, 100));
+       if (Vec2f::distSqr(x, y) > 0 && Vec2f::distSqr(x, z) > 0) print_float(x.calc_angle(y, z), '\n');
    }
 
    if (isSingleEdge())
