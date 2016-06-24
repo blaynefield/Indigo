@@ -1161,7 +1161,7 @@ void MoleculeLayoutMacrocyclesLattice::updateTouchingPoints(Array<local_pair_id>
    float good_distance = 1;
    pairs.clear();
 
-   printf("%d %.5f %.5f %.5f\n", len, eps, eps2, good_distance);
+   if (do_print) printf("%d %.5f %.5f %.5f\n", len, eps, eps2, good_distance);
 
    QS_DEF(Array<Vec2f>, all_points);
    QS_DEF(Array<float>, all_numbers);
@@ -1199,7 +1199,15 @@ void MoleculeLayoutMacrocyclesLattice::updateTouchingPoints(Array<local_pair_id>
 }
 
 void MoleculeLayoutMacrocyclesLattice::smoothing(CycleLayout &cl, bool do_print) {
+    if (do_print) {
+        printf("Before closing\n");
+        for (int i = 0; i < cl.point.size(); i++) printf("%.5f %.5f ", cl.point[i].x, cl.point[i].y);
+    }
     closing(cl);
+    if (do_print) {
+        printf("After closing\n");
+        for (int i = 0; i < cl.point.size(); i++) printf("%.5f %.5f ", cl.point[i].x, cl.point[i].y);
+    }
 
     Random rand(SOME_MAGIC_INT_FOR_RANDOM_2);
     int iter_count = max(50 * length, 2000);
