@@ -1134,19 +1134,19 @@ void MoleculeLayoutMacrocyclesLattice::closing(CycleLayout &cl) {
 			  break;
 		  }
       }
-      bool angle = rand.next() & 1;
-      bool next = rand.next() & 1;
+      bool is_angle = rand.next() & 1;
+      bool is_next = rand.next() & 1;
       int base_vertex = rand.next(cl.vertex_count + 1);
 
       if ((cl.point[0] - cl.point[cl.vertex_count]).lengthSqr() != 0) {
-         if (angle && (base_vertex == 0 || base_vertex == cl.vertex_count)) continue;
-         if (!angle && ((base_vertex == 0 && !next) || (base_vertex == cl.vertex_count && next))) continue;
+          if (is_angle && (base_vertex == 0 || base_vertex == cl.vertex_count)) continue;
+          if (!is_angle && ((base_vertex == 0 && !is_next) || (base_vertex == cl.vertex_count && is_next))) continue;
       }
       else {
          if (base_vertex == cl.vertex_count) continue;
       }
 
-      closingStep(cl, i, base_vertex, angle, next, multiplyer);
+      closingStep(cl, i, base_vertex, is_angle, is_next, multiplyer);
       if (lenSqr == 0) multiplyer *= CHANGE_FACTOR;
       //if (i % 100 == 0) printf("%.5f\n", rating(cl));
    }
