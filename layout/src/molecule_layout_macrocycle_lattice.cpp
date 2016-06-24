@@ -1154,12 +1154,14 @@ void MoleculeLayoutMacrocyclesLattice::closing(CycleLayout &cl) {
 
 }
 
-void MoleculeLayoutMacrocyclesLattice::updateTouchingPoints(Array<local_pair_id>& pairs, CycleLayout& cl) {
+void MoleculeLayoutMacrocyclesLattice::updateTouchingPoints(Array<local_pair_id>& pairs, CycleLayout& cl, bool do_print) {
    int len = cl.vertex_count;
    float eps = 1e-4;
    float eps2 = eps * eps;
    float good_distance = 1;
    pairs.clear();
+
+   printf("%d %.5f %.5f %.5f\n", len, eps, eps2, good_distance);
 
    QS_DEF(Array<Vec2f>, all_points);
    QS_DEF(Array<float>, all_numbers);
@@ -1173,9 +1175,15 @@ void MoleculeLayoutMacrocyclesLattice::updateTouchingPoints(Array<local_pair_id>
          all_numbers.push(j + s);
       }
    }
+   for (int i = 0; i < all_numbers.size(); i++) printf("%.5f ", all_numbers[i]);
+   printf("\n");
+   for (int i = 0; i < all_numbers.size(); i++) printf("%.5f %.5f ", all_points[i].x, all_points[i].y);
+   printf("\n");
+
    for (int i = 0; i < len; i++) {
       for (int j = 0; j < all_points.size(); j++) {
          int diff = (i - (int)all_numbers[j] + len) % len;
+         printf("%d\n", diff);
          if (diff > 1 && diff != len - 1) {
             float distSqr = (cl.point[i] - all_points[j]).lengthSqr();
             if (eps2 < distSqr && distSqr < good_distance) {
@@ -1196,7 +1204,7 @@ void MoleculeLayoutMacrocyclesLattice::smoothing(CycleLayout &cl, bool do_print)
 
     float coef = SMOOTHING_MULTIPLIER;
     for (int i = 0; i < iter_count; i++) {
-        if ((i & (i - 1)) == 0) updateTouchingPoints(touching_points, cl);
+        if ((i & (i - 1)) == 0) updateTouchingPoints(touching_points, cl, do_print);
         if (do_print && (i & (i - 1)) == 0) {
             printf("touching points : %d\n", touching_points.size());
             for (int j = 0; j < touching_points.size(); j++) printf("%d - %.5f, ", touching_points[j].left, touching_points[j].right);
