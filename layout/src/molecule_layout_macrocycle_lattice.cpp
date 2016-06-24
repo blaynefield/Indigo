@@ -1127,18 +1127,23 @@ void MoleculeLayoutMacrocyclesLattice::closing(CycleLayout &cl, bool do_print) {
 
    for (int i = 0; i < iter_count; i++) {
       float lenSqr = (cl.point[0] - cl.point[cl.vertex_count]).lengthSqr();
+      if (do_print) printf("%.5f", lenSqr);
       if (lenSqr < 0.25) {
 		  float angle = - PI * cl.vertex_count;
 		  for (int i = 0; i < cl.vertex_count; i++) angle += cl.point[i].calc_angle_pos(cl.point[(i + 1) % cl.vertex_count], cl.point[(i + cl.vertex_count - 1) % cl.vertex_count]);
+        if (do_print) printf("%.5f", angle);
 		  if (angle < 0) {
 			  cl.point[cl.vertex_count].copy(cl.point[0]);
 			  if (do_print) printf("%d iterations\n", i);
 			  break;
 		  }
       }
+      if (do_print) printf("\n");
+
       bool is_angle = rand.next() & 1;
       bool is_next = rand.next() & 1;
       int base_vertex = rand.next(cl.vertex_count + 1);
+      if (do_print) printf("%d %d %d\n", is_angle, is_next, base_vertex);
 
       if ((cl.point[0] - cl.point[cl.vertex_count]).lengthSqr() != 0) {
           if (is_angle && (base_vertex == 0 || base_vertex == cl.vertex_count)) continue;
