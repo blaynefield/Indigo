@@ -1175,15 +1175,17 @@ void MoleculeLayoutMacrocyclesLattice::updateTouchingPoints(Array<local_pair_id>
          all_numbers.push(j + s);
       }
    }
-   for (int i = 0; i < all_numbers.size(); i++) printf("%.5f ", all_numbers[i]);
-   printf("\n");
-   for (int i = 0; i < all_numbers.size(); i++) printf("%.5f %.5f ", all_points[i].x, all_points[i].y);
-   printf("\n");
+   if (do_print) {
+       for (int i = 0; i < all_numbers.size(); i++) printf("%.5f ", all_numbers[i]);
+       printf("\n");
+       for (int i = 0; i < all_numbers.size(); i++) printf("%.5f %.5f ", all_points[i].x, all_points[i].y);
+       printf("\n");
+   }
 
    for (int i = 0; i < len; i++) {
       for (int j = 0; j < all_points.size(); j++) {
          int diff = (i - (int)all_numbers[j] + len) % len;
-         printf("%d\n", diff);
+         if (do_print) printf("%d\n", diff);
          if (diff > 1 && diff != len - 1) {
             float distSqr = (cl.point[i] - all_points[j]).lengthSqr();
             if (eps2 < distSqr && distSqr < good_distance) {
