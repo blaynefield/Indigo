@@ -282,6 +282,9 @@ void MoleculeLayoutGraphSmart::_assignRelativeCoordinates (int &fixed_component,
    profTimerStart(t, "_assignRelativeCoordinates");
    int i;
 
+   Random rand(111111);
+   for (int j = 0; j < 100; j++) print_float(acos(rand.nextDoubleBounded(-1, 1)), '\n');
+
    if (isSingleEdge())
    {
       _assignRelativeSingleEdge(fixed_component, supergraph);
