@@ -1206,7 +1206,7 @@ void MoleculeLayoutMacrocyclesLattice::smoothing(CycleLayout &cl, bool do_print)
         for (int i = 0; i < cl.point.size(); i++) printf("%.5f %.5f ", cl.point[i].x, cl.point[i].y);
         printf("\n");
     }
-    closing(cl);
+    closing(cl, do_print);
     if (do_print) {
         printf("After closing\n");
         for (int i = 0; i < cl.point.size(); i++) printf("%.5f %.5f ", cl.point[i].x, cl.point[i].y);
