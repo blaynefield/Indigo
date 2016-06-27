@@ -159,17 +159,23 @@ float Vec2f::calc_angle(Vec2f a, Vec2f b) {
    print_float2(sqrt(a.lengthSqr() * b.lengthSqr()), '\n');
    printf("Dot: "); print_float2(Vec2f::dot(a, b), '\n');?*/
 
-	double cos = Vec2f::dot(a, b) / sqrt(a.lengthSqr() * b.lengthSqr());
-	if (cos > 1) cos = 1;
-	if (cos < -1) cos = -1;
-   /*printf("Cos: ");
-   print_float2(cos, '\n');*/
-	double angle = acos(cos);
-   /*printf("Angle: ");
-   print_float2(angle, '\n');*/
-   if (Vec2f::cross(a, b) < 0) angle = -angle;
-   /*printf("result: ");
-   print_float2(angle);*/
+   float cross = Vec2f::cross(a, b);
+   float dot = Vec2f::dot(a, b);
+	float cos = dot / sqrt(a.lengthSqr() * b.lengthSqr());
+
+   float angle;
+   if (2 * cos * cos < 1) {
+       angle = acos(cos);
+       if (cross < 0) angle = -angle;
+   }
+   else {
+       angle = asin(dot);
+       if (dot < 0) {
+           if (cross >= 0) angle = PI - angle;
+           else angle = -PI - angle;
+       }
+   }
+
 	return angle;
 }
 
