@@ -164,7 +164,7 @@ float Vec2f::calc_angle(Vec2f a, Vec2f b) {
 	if (cos < -1) cos = -1;
    /*printf("Cos: ");
    print_float2(cos, '\n');*/
-	float angle = acos(cos);
+	double angle = acos(cos);
    /*printf("Angle: ");
    print_float2(angle, '\n');*/
    if (Vec2f::cross(a, b) < 0) angle = -angle;
