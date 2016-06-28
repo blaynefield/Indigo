@@ -283,6 +283,7 @@ void MoleculeLayoutGraphSmart::_assignRelativeCoordinates (int &fixed_component,
    int i;
 
    Random rand(111111);
+   print_float(PI, '\n');
    for (int j = 0; j < 100; j++) {
        /*Vec2f x(rand.nextBounded(0, 200), rand.nextBounded(0, 200));
        Vec2f y(rand.nextBounded(0, 200), rand.nextBounded(0, 200));
