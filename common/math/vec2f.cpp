@@ -162,6 +162,7 @@ float Vec2f::calc_angle(Vec2f a, Vec2f b) {
    float cross = Vec2f::cross(a, b);
    float dot = Vec2f::dot(a, b);
 	float cos = dot / sqrt(a.lengthSqr() * b.lengthSqr());
+   float sin = cross / sqrt(a.lengthSqr() * b.lengthSqr());
 
    float angle;
    if (2 * cos * cos < 1) {
@@ -169,7 +170,7 @@ float Vec2f::calc_angle(Vec2f a, Vec2f b) {
        if (cross < 0) angle = -angle;
    }
    else {
-       angle = asin(dot);
+       angle = asin(sin);
        if (dot < 0) {
            if (cross >= 0) angle = PI - angle;
            else angle = -PI - angle;
