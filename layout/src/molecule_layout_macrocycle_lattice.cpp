@@ -108,7 +108,7 @@ void MoleculeLayoutMacrocyclesLattice::doLayout() {
          return;
       }
    }
-   for (int i = 0; i < length; i++) printf("%d ", _vertex_weight[i]);
+   /*for (int i = 0; i < length; i++) printf("%d ", _vertex_weight[i]);
    printf("\n");
    for (int i = 0; i < length; i++) printf("%d ", _edge_stereo[i]);
    printf("\n");
@@ -117,7 +117,7 @@ void MoleculeLayoutMacrocyclesLattice::doLayout() {
    for (int i = 0; i < length; i++) printf("%.5f ", _vertex_added_square[i]);
    printf("\n");
    for (int i = 0; i < length; i++) printf("%.5f ", _target_angle[i]);
-   printf("\n");
+   printf("\n");*/
    calculate_rotate_length();
 
    rotate_cycle(rotate_length);
