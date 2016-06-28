@@ -145,24 +145,29 @@ float Vec2f::tiltAngle2 ()
 }
 
 float Vec2f::calc_angle(Vec2f a, Vec2f b) {
-    /*printf("\ncalc_angle !!\n");
+    printf("\ncalc_angle !!\n");
     print_float2(x); print_float2(y, '\n');
     print_float2(a.x); print_float2(a.y, '\n');
-    print_float2(b.x); print_float2(b.y, '\n');*/
+    print_float2(b.x); print_float2(b.y, '\n');
     a -= *this;
 	b -= *this;
-   /*printf("LenSQR of a: "); print_float2(a.lengthSqr());
+   printf("LenSQR of a: "); print_float2(a.lengthSqr());
    printf("LenSQR of b: "); print_float2(b.lengthSqr());
    printf("Value: ");
    print_float2(a.lengthSqr() * b.lengthSqr(), '\n');
    printf("Square root: ");
    print_float2(sqrt(a.lengthSqr() * b.lengthSqr()), '\n');
-   printf("Dot: "); print_float2(Vec2f::dot(a, b), '\n');?*/
 
    float cross = Vec2f::cross(a, b);
    float dot = Vec2f::dot(a, b);
 	float cos = dot / sqrt(a.lengthSqr() * b.lengthSqr());
    float sin = cross / sqrt(a.lengthSqr() * b.lengthSqr());
+
+   printf("Dot: "); print_float2(dot, '\n');
+   printf("Cross: "); print_float2(cross, '\n');
+   printf("Cos: "); print_float2(cos, '\n');
+   printf("Sin: "); print_float2(sin, '\n');
+
 
    float angle;
    if (2 * cos * cos < 1) {
@@ -176,6 +181,8 @@ float Vec2f::calc_angle(Vec2f a, Vec2f b) {
            else angle = -PI - angle;
        }
    }
+
+   printf("Angle: "); print_float2(angle, '\n');
 
 	return angle;
 }
