@@ -166,11 +166,11 @@ float Vec2f::calc_angle(Vec2f a, Vec2f b) {
 
    float angle;
    if (2 * cos * cos < 1) {
-       angle = acos(cos);
+       angle = acos_stable(cos);
        if (cross < 0) angle = -angle;
    }
    else {
-       angle = asin(sin);
+       angle = asin_stable(sin);
        if (dot < 0) {
            if (cross >= 0) angle = PI - angle;
            else angle = -PI - angle;
