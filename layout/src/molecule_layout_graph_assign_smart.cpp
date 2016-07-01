@@ -398,7 +398,7 @@ void MoleculeLayoutGraphSmart::_assignEveryCycle(const Cycle &cycle)
 	   for (int i = 0; i < size; i++)
 		   _molecule->cis_trans.setParity(_layout_edges[cycle.getEdge(i)].orig_idx, 0);
 
-   layout.print();
+   //layout.print();
    for (int i = 0; i < size; i++) {
 
 	   // edge parallels
@@ -488,7 +488,7 @@ void MoleculeLayoutGraphSmart::_assignEveryCycle(const Cycle &cycle)
 	   // trees sizes
 
    }
-   layout.print();
+   //layout.print();
    QS_DEF(ObjArray<MoleculeLayoutSmoothingSegment>, segment);
    QS_DEF(Array<Vec2f>, rotation_point);
    QS_DEF(Array<int>, rotation_vertex);
@@ -503,7 +503,7 @@ void MoleculeLayoutGraphSmart::_assignEveryCycle(const Cycle &cycle)
 		   if (segment[i].is_finish(v)) if (segment[i]._graph.getVertex(v).degree() > 2) layout.setEdgeStereo((rotation_vertex[(i + 1) % segment_count] - 1 + size) % size, 0);
 	   }
    }
-   layout.print();
+   //layout.print();
    /*bool easy_case = size <= 9;
    if (easy_case) {
    QS_DEF(Array<int>, last);
@@ -1244,7 +1244,7 @@ void MoleculeLayoutGraphSmart::_do_segment_smoothing(Array<Vec2f> &rotation_poin
 
 void MoleculeLayoutGraphSmart::_segment_smoothing_prepearing(const Cycle &cycle, Array<int> &rotation_vertex, Array<Vec2f> &rotation_point, ObjArray<MoleculeLayoutSmoothingSegment> &segment, MoleculeLayoutMacrocyclesLattice& layout) {
    int cycle_size = cycle.vertexCount();
-   printf("%d\n", cycle_size);
+   //printf("%d\n", cycle_size);
 
    QS_DEF(Array<bool>, layout_comp_touch);
    layout_comp_touch.clear_resize(_layout_component_count);
