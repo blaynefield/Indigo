@@ -178,9 +178,9 @@ float Vec2f::calc_angle(Vec2f a, Vec2f b) {
     print_float2(b.x); print_float2(b.y, '\n');
     a -= *this;
 	b -= *this;
-   float len_sqr_a = a.lengthSqr();
-   float len_sqr_b = b.lengthSqr();
-   float mult_ab = len_sqr_a * len_sqr_b;
+   double len_sqr_a = a.lengthSqr();
+   double len_sqr_b = b.lengthSqr();
+   double mult_ab = len_sqr_a * len_sqr_b;
    double sqr = sqrt(mult_ab);
    printf("LenSQR of a: "); print_float2(len_sqr_a, '\n');
    printf("LenSQR of b: "); print_float2(len_sqr_b, '\n');
