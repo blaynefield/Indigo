@@ -46,6 +46,33 @@ void print_float2(float x, char c = ' ') {
     printf("%c", c);
 }
 
+void print_double(double x, char c = ' ') {
+    int sign = x < 0 ? -1 : 1;
+    x = fabs(x);
+    int deg = 0;
+
+    if (x != 0) {
+        while (x >= 2) {
+            deg++;
+            x /= 2;
+        }
+        while (x < 1) {
+            deg--;
+            x *= 2;
+        }
+    }
+    printf("%d ", deg);
+    if (sign > 0) printf("+"); else printf("-");
+
+    printf("0");
+    while (x != 0) {
+        if (x >= 1) printf("1"); else printf("0");
+        if (x >= 1) x -= 1;
+        x *= 2;
+    }
+    printf("%c", c);
+}
+
 bool Vec2f::normalize()
 {
    float l = lengthSqr();
@@ -151,21 +178,21 @@ float Vec2f::calc_angle(Vec2f a, Vec2f b) {
     print_float2(b.x); print_float2(b.y, '\n');
     a -= *this;
 	b -= *this;
+   double sqr = sqrt(a.lengthSqr() * b.lengthSqr());
    printf("LenSQR of a: "); print_float2(a.lengthSqr(), '\n');
    printf("LenSQR of b: "); print_float2(b.lengthSqr(), '\n');
    printf("Value: ");
    print_float2(a.lengthSqr() * b.lengthSqr(), '\n');
    printf("Square root: ");
-   print_float2(sqrt(a.lengthSqr() * b.lengthSqr()), '\n');
+   print_double(sqr, '\n');
 
    double cross = Vec2f::cross(a, b);
    double dot = Vec2f::dot(a, b);
-   double sqr = sqrt(a.lengthSqr() * b.lengthSqr());
 	float cos = dot / sqr;
    float sin = cross / sqr;
 
-   printf("Dot: "); print_float2(dot, '\n');
-   printf("Cross: "); print_float2(cross, '\n');
+   printf("Dot: "); print_double(dot, '\n');
+   printf("Cross: "); print_double(cross, '\n');
    printf("Cos: "); print_float2(cos, '\n');
    printf("Sin: "); print_float2(sin, '\n');
 
